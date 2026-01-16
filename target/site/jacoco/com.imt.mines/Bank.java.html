@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Bank.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bank-application</a> &gt; <a href="index.source.html" class="el_package">com.imt.mines</a> &gt; <span class="el_source">Bank.java</span></div><h1>Bank.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.imt.mines;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author jay
+ */
+public class Bank {
+
+	private static ArrayList&lt;BankAccount&gt; Accounts;
+<span class="fc" id="L20">	private final int initialSize = 1000;</span>
+	private boolean success;
+	// private double maximumBalance;
+	private double averageBalance;
+	// private double minumumBalance;
+<span class="fc" id="L25">	private int accNumber = 1;</span>
+<span class="fc" id="L26">	private int accountsLoaded = 0;</span>
+	// Bank accManeger = new Bank();
+
+<span class="fc" id="L29">	public Bank() {</span>
+
+<span class="fc" id="L31">		Accounts = new ArrayList&lt;BankAccount&gt;(initialSize);</span>
+
+<span class="fc" id="L33">	}</span>
+
+	public int addAccount(BankAccount acc, int isLoadAccount) {
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">		if (isLoadAccount == 0) {</span>
+<span class="fc" id="L37">			Accounts.add(acc);</span>
+<span class="fc" id="L38">			acc.setAccountNumber(accNumber);</span>
+<span class="fc" id="L39">			accountsLoaded++;</span>
+<span class="fc" id="L40">			accNumber++;</span>
+		}
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">		if (isLoadAccount == 1) {</span>
+<span class="nc" id="L43">			Accounts.add(acc);</span>
+<span class="nc" id="L44">			accountsLoaded++;</span>
+<span class="nc" id="L45">			return accountsLoaded;</span>
+		}
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">		if (isLoadAccount == 2) {</span>
+<span class="nc" id="L48">			int accnumber1 = accountsLoaded + 1;</span>
+<span class="nc" id="L49">			Accounts.add(acc);</span>
+<span class="nc" id="L50">			acc.setAccountNumber(accnumber1);</span>
+<span class="nc" id="L51">			accountsLoaded++;</span>
+		}
+<span class="fc" id="L53">		return acc.getAccountNumber();</span>
+	}
+
+	protected void setAccountsLoaded(int accountsLoaded) {
+<span class="nc" id="L57">		this.accountsLoaded = accountsLoaded;</span>
+<span class="nc" id="L58">	}</span>
+
+	protected int getAccountsLoaded() {
+<span class="nc" id="L61">		return accountsLoaded;</span>
+	}
+
+	public BankAccount findAccount(int accountNumber) {
+<span class="pc bfc" id="L65" title="All 2 branches covered.">		for (int i = 0; i &lt; Accounts.size(); i++) {</span>
+<span class="fc" id="L66">			BankAccount acc = Accounts.get(i);</span>
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">			if (accountNumber == acc.getAccountNumber()) {</span>
+<span class="fc" id="L68">				return acc;</span>
+			}
+		}
+<span class="fc" id="L71">		return null;</span>
+	}
+
+
+	public void deleteAccount(int accountNumber) {
+<span class="fc bfc" id="L76" title="All 2 branches covered.">		for (int i = 0; i &lt; Accounts.size(); i++) {</span>
+<span class="fc" id="L77">			BankAccount acc = Accounts.get(i);</span>
+<span class="fc" id="L78">			int compareAccountNumber = acc.getAccountNumber();</span>
+
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">			if (accountNumber == compareAccountNumber) {</span>
+<span class="fc" id="L81">				Accounts.remove(acc);</span>
+			}
+
+		}
+<span class="fc" id="L85">	}</span>
+
+	public double getAverageBalance() {
+<span class="nc" id="L88">		double total = 0.0;</span>
+
+<span class="nc bnc" id="L90" title="All 2 branches missed.">		for (int i = 0; i &lt; Accounts.size(); i++) {</span>
+<span class="nc" id="L91">			BankAccount tmpAcc = Accounts.get(i);</span>
+
+<span class="nc" id="L93">			total += tmpAcc.getBalance();</span>
+		}
+<span class="nc" id="L95">		averageBalance = total / Accounts.size();</span>
+
+<span class="nc" id="L97">		return averageBalance;</span>
+	}
+
+	public double getMaximumBalance() {
+<span class="nc" id="L101">		Double maximumBalance = 0.0;</span>
+
+<span class="nc bnc" id="L103" title="All 2 branches missed.">		for (int i = 0; i &lt; Accounts.size(); i++) {</span>
+<span class="nc" id="L104">			BankAccount tmpAcc = Accounts.get(i);</span>
+
+<span class="nc bnc" id="L106" title="All 2 branches missed.">			if (tmpAcc.getBalance() &gt; maximumBalance) {</span>
+<span class="nc" id="L107">				maximumBalance = tmpAcc.getBalance();</span>
+			}
+		}
+
+<span class="nc" id="L111">		return maximumBalance;</span>
+	}
+
+	public double getMinimumBalance() { // if account 0 dosen't exist minimum is always 0
+<span class="nc" id="L115">		Double minimumBalance = 0.0;</span>
+
+<span class="nc bnc" id="L117" title="All 2 branches missed.">		for (int i = 0; i &lt; Accounts.size(); i++) {</span>
+
+<span class="nc" id="L119">			BankAccount tmpAcc = Accounts.get(i);</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">			if (i == 0) {</span>
+<span class="nc" id="L121">				minimumBalance = tmpAcc.getBalance();</span>
+			}
+<span class="nc bnc" id="L123" title="All 2 branches missed.">			if (tmpAcc.getBalance() &lt; minimumBalance) {</span>
+<span class="nc" id="L124">				minimumBalance = tmpAcc.getBalance();</span>
+			}
+		}
+<span class="nc" id="L127">		return minimumBalance;</span>
+	}
+
+	public void saveAccounts(Bank accManager) {
+<span class="nc" id="L131">		FileOutputStream fos = null;</span>
+<span class="nc" id="L132">		OutputStreamWriter osw = null;</span>
+		try {
+<span class="nc" id="L134">			fos = new FileOutputStream(&quot;C:\\Users\\jay4k\\Desktop\\stuff\\Bankaccountinfo\\BankAccountinfotext.text&quot;);</span>
+<span class="nc" id="L135">			osw = new OutputStreamWriter(fos);</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">			for (int i = 0; i &lt; Accounts.size(); i++) {</span>
+<span class="nc" id="L137">				BankAccount tmp = Accounts.get(i);</span>
+
+<span class="nc" id="L139">				osw.write(tmp.convertToText(tmp));</span>
+
+			}
+<span class="nc" id="L142">		} catch (IOException e) {</span>
+<span class="nc" id="L143">			System.out.println(&quot;Error writing to file&quot;);</span>
+		} finally {
+<span class="nc bnc" id="L145" title="All 2 branches missed.">			if (osw != null) {</span>
+				try {
+<span class="nc" id="L147">					osw.close();</span>
+<span class="nc" id="L148">				} catch (IOException e) {</span>
+					// no action
+<span class="nc" id="L150">				}</span>
+			}
+<span class="nc bnc" id="L152" title="All 2 branches missed.">			if (fos != null) {</span>
+				try {
+<span class="nc" id="L154">					fos.close();</span>
+<span class="nc" id="L155">				} catch (IOException e) {</span>
+					// no action
+<span class="nc" id="L157">				}</span>
+			}
+		}
+
+<span class="nc" id="L161">	}</span>
+
+	public String convertToText() {
+<span class="nc" id="L164">		String allAccountInfo = &quot;&quot;;</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">		for (int i = 0; i &lt; Accounts.size(); i++) {</span>
+<span class="nc" id="L166">			BankAccount acc = Accounts.get(i);</span>
+<span class="nc" id="L167">			String AccountsInfo = acc.getAccountNumber() + Person.DELIM + acc.getBalance() + Person.DELIM</span>
+<span class="nc" id="L168">					+ acc.getWithdrawLimit() + Person.DELIM + acc.getDateCreated() + Person.DELIM</span>
+<span class="nc" id="L169">					+ acc.getAccountHolder();</span>
+<span class="nc" id="L170">			allAccountInfo += AccountsInfo;</span>
+		}
+<span class="nc" id="L172">		return allAccountInfo;</span>
+	}
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+	public ArrayList&lt;BankAccount&gt; getAccounts() {
+<span class="nc" id="L177">		return (ArrayList&lt;BankAccount&gt;) Accounts.clone();</span>
+	}
+
+	public boolean registerAccount(int fromAccountNumber, int fromRoutingNumber, int destinationBank,
+			int toAccountNumber) {
+<span class="nc" id="L182">		return true;</span>
+	};
+
+	public boolean transferAmount(int fromAccountNumber, int fromRoutingNumber, int destinationBank,
+			int toAccountNumber, float amount) {
+<span class="nc" id="L187">		ACHServiceImpl service = new ACHServiceImpl();</span>
+<span class="nc" id="L188">		service.transferAmount(fromAccountNumber, fromRoutingNumber, destinationBank, toAccountNumber, amount);</span>
+<span class="nc" id="L189">		return true;</span>
+	};
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
