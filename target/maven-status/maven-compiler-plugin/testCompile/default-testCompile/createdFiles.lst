@@ -1,2 +1,4 @@
-com/imt/mines/PersonTest.class
 com/imt/mines/BankTest.class
+com/imt/mines/PersonTest.class
+com/imt/mines/bank/bdd/BankAccountBasicSteps.class
+com/imt/mines/bank/bdd/RunBankAccountCucumberTest.class

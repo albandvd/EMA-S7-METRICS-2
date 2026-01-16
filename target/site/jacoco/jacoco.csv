@@ -3,5 +3,4 @@ bank-application,com.imt.mines,BankAccountApp,432,0,74,0,134,0,39,0,2,0
 bank-application,com.imt.mines,Person,49,205,5,17,16,64,14,20,9,14
 bank-application,com.imt.mines,BankAccount,309,57,19,1,86,20,26,5,16,5
 bank-application,com.imt.mines,Bank,237,91,25,9,61,25,25,6,10,4
-bank-application,com.imt.mines,Main,19,0,2,0,5,0,3,0,2,0
 bank-application,com.imt.mines,ACHServiceImpl,7,0,0,0,3,0,3,0,3,0
