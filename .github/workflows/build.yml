@@ -1,0 +1,38 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Check out the code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 2. Set up the Java Development Kit (JDK)
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'maven'
+
+    # 3. Run tests (Your original requirement)
+    - name: Run tests
+      run: mvn clean test
+
+    # 4. Package the application (New Step)
+    - name: Package application
+      run: mvn package -DskipTests 
+      # Note: -DskipTests is optional if you don't want to re-run tests during packaging
+
+    # 5. Save target folder as an artifact (New Step)
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: maven-build-output
+        path: target/
